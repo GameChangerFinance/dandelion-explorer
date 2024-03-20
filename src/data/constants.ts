@@ -1,1 +1,1 @@
-export const INITIAL_ROW_LIMIT = 25000;
+export const INITIAL_ROW_LIMIT = 10;

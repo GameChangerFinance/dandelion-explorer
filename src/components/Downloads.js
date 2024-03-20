@@ -136,11 +136,11 @@ export default class Downloads extends Component {
       fileName = fileName.replace(
         /limit-\d*/g,
         "limit-" +
-          maxRowsInDownload +
-          "-range-" +
-          this.state.batchDownloadLowerNum +
-          "-" +
-          this.state.batchDownloadUpperNum
+        maxRowsInDownload +
+        "-range-" +
+        this.state.batchDownloadLowerNum +
+        "-" +
+        this.state.batchDownloadUpperNum
       );
     }
 
@@ -320,17 +320,18 @@ export default class Downloads extends Component {
   }
 
   identifySeqColumnInStateColumns() {
-    let seqColumn = null;
-    let seqColumnNames = lib.getValueFromConfig("seq_column_names");
-    for (let i in this.state.columns) {
-      let columnName = this.state.columns[i];
+    return null;
+    // let seqColumn = null;
+    // let seqColumnNames = lib.getValueFromConfig("seq_column_names");
+    // for (let i in this.state.columns) {
+    //   let columnName = this.state.columns[i];
 
-      if (lib.inArray(columnName, seqColumnNames)) {
-        seqColumn = columnName;
-        break;
-      }
-    }
-    return seqColumn;
+    //   if (lib.inArray(columnName, seqColumnNames)) {
+    //     seqColumn = columnName;
+    //     break;
+    //   }
+    // }
+    // return seqColumn;
   }
 
   downloadTableAsFASTA(dataFullStatus = false) {
@@ -960,7 +961,7 @@ export default class Downloads extends Component {
             <span
               style={
                 this.state.batchDownloadCheckBox !== true ||
-                this.state.fileFormat === "delimitedColumn"
+                  this.state.fileFormat === "delimitedColumn"
                   ? styleSheet.hidden
                   : styleSheet.inlineTextField1
               }
@@ -968,7 +969,7 @@ export default class Downloads extends Component {
               <div
                 style={
                   isNaN(this.props.totalRows) === false &&
-                  this.props.totalRows >= 0
+                    this.props.totalRows >= 0
                     ? styleSheet.hidden
                     : null
                 }

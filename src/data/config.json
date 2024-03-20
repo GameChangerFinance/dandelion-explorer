@@ -1,31 +1,34 @@
 {
   "databases": [
     {
-      "title": "DVD Rentals",
-      "url": "http://localhost:3001",
+      "title": "Cardano Mainnet",
+      "tool": {
+        "label": "PostgREST Help",
+        "url": "https://postgrest.org/en/v12/references/api/tables_views.html",
+        "nativeIde": "https://beta-wallet.gamechanger.finance/playground",
+        "ide": "https://inception.m2tec.nl/"
+      },
+      "url": "https://d.postgrest-api.mainnet.dandelion.link",
       "publicDbAcessType": "read",
-      "foreignKeySearch": true,
+      "foreignKeySearch": false,
       "primaryKeyFunction": true,
-      "regexSupport": false
+      "regexSupport": true
+    },
+    {
+      "title": "Cardano Pre-Production Testnet",
+      "tool": {
+        "label": "PostgREST Help",
+        "url": "https://postgrest.org/en/v12/references/api/tables_views.html",
+        "nativeIde": "https://beta-preprod-wallet.gamechanger.finance/playground",
+        "ide": "https://inception.m2tec.nl/"
+      },
+      "url": "https://d.postgrest-api.iohk-preprod.dandelion.link",
+      "publicDbAcessType": "read",
+      "foreignKeySearch": false,
+      "primaryKeyFunction": true,
+      "regexSupport": true
     }
   ],
-  "logoUrl": null,
-  "seq_column_names": [
-    "alignment_sequence",
-    "nucleotide_sequence",
-    "aminoacid_sequence",
-    "nucleotide_seq",
-    "amino_acid_seq",
-    "nuc_seq",
-    "aa_seq",
-    "dna_seq",
-    "protein_seq",
-    "prot_seq",
-    "n_seq",
-    "p_seq",
-    "a_seq",
-    "seq",
-    "sequence"
-  ],
+  "logoUrl": "https://beta-wallet.gamechanger.finance/apple-touch-icon.png",
   "errorMsg": "ERROR"
 }

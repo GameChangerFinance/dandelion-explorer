@@ -36,7 +36,7 @@ coverage
 build/Release
 
 # Compiled build dir (npm serve)
-build
+#build
 
 # Dependency directories
 node_modules

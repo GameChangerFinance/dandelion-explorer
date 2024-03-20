@@ -14,6 +14,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import MenuIcon from "@material-ui/icons/Menu";
 import HistoryIcon from "@material-ui/icons/History";
 import HelpIcon from "@material-ui/icons/HelpOutline";
+import CodeIcon from '@material-ui/icons/Code';
+import SettingsEthernetIcon from '@material-ui/icons/SettingsEthernet';
 
 import FeatureDiscoveryPrompt from "./FeatureDiscoveryPrompt/FeatureDiscoveryPrompt";
 import indigo from "@material-ui/core/colors/indigo";
@@ -58,8 +60,8 @@ export default class Navigation extends Component {
 
   changeSearchTerm(e) {
     /*if (e && ((e.key && e.key === 'Enter') || !e.target.value)) {
-			this.props.changeSearchTerm(e.target.value);
-		}*/
+      this.props.changeSearchTerm(e.target.value);
+    }*/
     this.changeSearchTermDebounce(e.target.value);
   }
 
@@ -89,6 +91,8 @@ export default class Navigation extends Component {
   render() {
     let dbTitle =
       lib.getDbConfig(this.props.dbIndex, "title") || "Untitled database";
+    let tool = lib.getDbConfig(this.props.dbIndex, "tool");
+
     let searchBarFdpOpenStyles = null;
     if (this.state.isSearchBarFdpOpen) {
       searchBarFdpOpenStyles = {
@@ -124,7 +128,7 @@ export default class Navigation extends Component {
                 !this.state.isSearchBarFdpOpen
               }
               backgroundColor={pink[500]}
-              title="Welcome to PostGUI"
+              title="Welcome to Dandelion Explorer!"
               customPaddingLeft={8.5}
               subtractFromTopPos={0}
               opacity={0.95}
@@ -144,7 +148,7 @@ export default class Navigation extends Component {
               color="inherit"
               style={styleSheet.dbTitleFlex}
             >
-              {dbTitle}
+              Dandelion Explorer{/* {dbTitle} */}
             </Typography>
 
             <div style={styleSheet.searchBarFlex}>
@@ -191,6 +195,7 @@ export default class Navigation extends Component {
               color="inherit"
               aria-label="History"
               onClick={this.props.toggleHistoryPane.bind(this)}
+              title="Query history"
             >
               <HistoryIcon style={styleSheet.floatRight} />
             </IconButton>
@@ -199,10 +204,13 @@ export default class Navigation extends Component {
               color="inherit"
               aria-label="Help"
               onClick={this.handleHelpToggle}
+              title={tool.label}
             >
               <HelpIcon style={styleSheet.floatRight} />
+              {/* <SettingsEthernetIcon style={styleSheet.floatRight} /> */}
+
             </IconButton>
-            <FeatureDiscoveryPrompt
+            {/* <FeatureDiscoveryPrompt
               onClose={() => {
                 this.setState({ isLoginFdpOpen: false });
               }}
@@ -233,7 +241,7 @@ export default class Navigation extends Component {
               >
                 {this.props.isLoggedIn ? "Logout" : "Login"}
               </Button>
-            </FeatureDiscoveryPrompt>
+            </FeatureDiscoveryPrompt> */}
           </Toolbar>
           <LoginDialog
             dbName={dbTitle.replace("Database", "db").replace("database", "db")}
@@ -244,6 +252,7 @@ export default class Navigation extends Component {
           <Help
             open={this.state.isHelpOpen}
             handleHelpToggle={this.handleHelpToggle}
+            tool={tool}
           />
         </AppBar>
       </>

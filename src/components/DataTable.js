@@ -283,7 +283,7 @@ export default class DataTable extends Component {
         // For all rows of a column changed
         let change =
           currentChanges[Object.keys(currentChanges)[i]][
-            Object.keys(currentColumnChanges)[ii]
+          Object.keys(currentColumnChanges)[ii]
           ];
 
         let primaryKey = change["primaryKey"];
@@ -520,7 +520,7 @@ export default class DataTable extends Component {
               changedRowPkStr
             ] =
               currentChanges[this.state.table][changedColumnName][
-                changedRowPkStr
+              changedRowPkStr
               ] || {};
 
             // Keep track of the original* value.
@@ -529,7 +529,7 @@ export default class DataTable extends Component {
               changedRowPkStr
             ]["oldValue"] =
               currentChanges[this.state.table][changedColumnName][
-                changedRowPkStr
+              changedRowPkStr
               ]["oldValue"] || oldCellValue;
 
             // Insert the updates + keep track of the PK
@@ -547,7 +547,7 @@ export default class DataTable extends Component {
             if (
               String(
                 currentChanges[this.state.table][changedColumnName][
-                  changedRowPkStr
+                changedRowPkStr
                 ]["oldValue"]
               ) === String(newCellValue)
             ) {
@@ -644,7 +644,28 @@ export default class DataTable extends Component {
   };
 
   render() {
-    let { columns, data } = this.state;
+    let { columns, data: _data } = this.state;
+    //lets try to render objects and arrays as stringified JSON for better datum and metadata rendering
+    const data = [...(_data || [])].map(_row => {
+      const row = {};
+      Object.entries(_row).forEach(([key, value]) => {
+        let serializedValue = value;
+        if (
+          (typeof value === 'object' ||
+            !Array.isArray(value)) &&
+          value !== null
+        ) {
+          try {
+            serializedValue = JSON.stringify(value);
+          } catch (err) { };
+        }
+        row[key] = serializedValue;
+      });
+      return row;
+    });
+
+    //console.log({ _data, data })
+
     let parsedColumns = [];
 
     // Create columns with expected column properties
@@ -703,19 +724,19 @@ export default class DataTable extends Component {
             columnWidth !== null
               ? columnWidth
               : columnWidthDefault
-              ? columnWidthDefault
-              : undefined,
+                ? columnWidthDefault
+                : undefined,
           maxWidth: columnMaxWidth !== null ? columnMaxWidth : undefined,
           minWidth: columnMinWidth !== null ? columnMinWidth : 100,
           headerStyle: { fontWeight: "bold" },
           Cell:
             this.state.editFeatureEnabled === true &&
-            columnEditability !== false
+              columnEditability !== false
               ? this.renderEditableCell
               : (row) =>
-                  row.value !== undefined && row.value !== null
-                    ? String(row.value)
-                    : row.value,
+                row.value !== undefined && row.value !== null
+                  ? String(row.value)
+                  : row.value,
         };
       });
     }
@@ -748,7 +769,7 @@ export default class DataTable extends Component {
       <>
         {this.state.editFeatureEnabled ? (
           <CheckboxTable
-            data={data}
+            data={_data}
             columns={parsedColumns}
             defaultPageSize={10}
             className="-striped -highlight"

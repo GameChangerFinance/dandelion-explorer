@@ -16,6 +16,7 @@ export default class Help extends Component {
   }
 
   render() {
+    const tool = this.props.tool;
     return (
       <Dialog
         fullScreen
@@ -33,16 +34,18 @@ export default class Help extends Component {
               <CloseIcon />
             </IconButton>
             <Typography variant="title" color="default" style={styleSheet.flex}>
-              Help
+              {tool.label}
             </Typography>
           </Toolbar>
         </AppBar>
-        <img
+        <iframe style={{ height: "100%" }} src={tool.url}>
+        </iframe>
+        {/* <img
           src={require("../resources/mr_clippy.jpeg")}
           alt="Help section not available yet"
           width={400}
           style={styleSheet.centered}
-        />
+        /> */}
       </Dialog>
     );
   }

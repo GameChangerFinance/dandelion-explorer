@@ -59,7 +59,7 @@ export default class LoginDialog extends Component<
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">
-          PostGUI Login{this.props.dbName ? " - " + this.props.dbName : ""}
+          Dandelion Explorer {this.props.dbName ? " - " + this.props.dbName : ""}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>

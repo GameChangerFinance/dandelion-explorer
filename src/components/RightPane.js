@@ -19,6 +19,10 @@ import DataTable from "./DataTable.js";
 import RightPaneChips from "./RightPaneChips.js";
 
 import "../styles/QueryBuilder.css";
+import { ListItemIcon } from "@material-ui/core";
+import LinkIcon from '@material-ui/icons/Link';
+import amber from '@material-ui/core/colors/amber';
+
 
 let lib = require("../utils/library.ts");
 const defaultRules = lib.getQBRules();
@@ -428,9 +432,9 @@ export default class RightPane extends Component {
       //url += "&select=" + this.state.selectColumns;
     } else {
       /* else if (this.state.selectColumns !== null && this.state.selectColumns !== [] && this.state.selectColumns !== "") {
-		            // Add SELECT columns... but this time, only selected columns, NO FILTERS
-		            url += "?select=" + this.state.selectColumns;
-		        }*/
+                // Add SELECT columns... but this time, only selected columns, NO FILTERS
+                url += "?select=" + this.state.selectColumns;
+            }*/
       url += "?limit=" + this.state.rowLimit;
       // TODO: display a Snack bar showing an error!!!
       this.setState(
@@ -469,9 +473,12 @@ export default class RightPane extends Component {
     if (this.props.isLoggedIn && this.props.token) {
       preparedHeaders["Authorization"] = "Bearer " + this.props.token;
     }
-
     axios
-      .get(url, { headers: preparedHeaders, requestId: "qbAxiosReq" })
+      .get(url, {
+        headers: preparedHeaders,
+        requestId: "qbAxiosReq",
+        //withCredentials: false,
+      })
       .then((response) => {
         let responseRows = null;
         let totalRows = null;
@@ -614,7 +621,33 @@ export default class RightPane extends Component {
 		}*/
     );
   }
-
+  handleCopyUrlToClipboard() {
+    //based on https://stackoverflow.com/a/12693636
+    const str = this.state.url;
+    document.oncopy = function (event) {
+      if (event && event.clipboardData) {
+        event.clipboardData.setData("Text", str);
+        event.preventDefault();
+      }
+    };
+    let copySuccess = document.execCommand("Copy");
+    document.oncopy = null;
+    this.setState(
+      {
+        snackBarVisibility: true,
+        snackBarMessage: "Link copied!",
+      },
+      () => {
+        this.timer = setTimeout(() => {
+          this.setState({
+            snackBarVisibility: false,
+            snackBarMessage: "Unknown error",
+          });
+        }, 2500);
+      }
+    );
+    return copySuccess;
+  }
   render() {
     let tableRename = lib.getTableConfig(
       this.props.dbIndex,
@@ -647,6 +680,22 @@ export default class RightPane extends Component {
             Query Builder
           </Typography>
           <div id="query-builder" ref="queryBuilder" />
+
+          <Paper className="query-builder" elevation={1}>
+            <Tooltip
+              id="tooltip-bottom"
+              title={"Copy query link"}
+              placement="bottom"
+            >
+              <ListItemIcon
+                style={{ margin: "16px" }}
+                onClick={this.handleCopyUrlToClipboard.bind(this)}
+              >
+                <LinkIcon />
+              </ListItemIcon>
+            </Tooltip>
+            <div style={{ textAlign: "center", padding: "16px", overflow: "auto" }}>{this.state?.url}</div>
+          </Paper>
 
           <Typography type="body1" style={styleSheet.cardMarginLeftTop}>
             Options
@@ -741,10 +790,10 @@ export default class RightPane extends Component {
                 this.state.submitLoading
                   ? "Loading ..."
                   : this.state.submitError
-                  ? "Query error"
-                  : this.state.submitSuccess
-                  ? "Success!"
-                  : "No rows found"
+                    ? "Query error"
+                    : this.state.submitSuccess
+                      ? "Success!"
+                      : "No rows found"
               }
             />
           </div>
@@ -813,5 +862,9 @@ let styleSheet = {
     opacity: 0.0,
     marginTop: 75,
     visibility: "hidden",
+  },
+  noStyleButton: {
+    border: "none",
+    fill: amber[700],
   },
 };
