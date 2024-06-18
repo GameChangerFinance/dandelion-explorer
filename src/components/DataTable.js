@@ -656,7 +656,7 @@ export default class DataTable extends Component {
           value !== null
         ) {
           try {
-            serializedValue = JSON.stringify(value);
+            serializedValue = JSON.stringify(value, null, 2);
           } catch (err) { };
         }
         row[key] = serializedValue;
@@ -714,10 +714,10 @@ export default class DataTable extends Component {
           columnName,
           "maxWidthPx"
         );
-
+        const headerLabel = columnRename ? columnRename : columnName;
         return {
           id: columnName,
-          Header: columnRename ? columnRename : columnName,
+          Header: (header) => <span title={`Shift + Right-Click to group-toggle table sorting with/without '${headerLabel}'`}>{headerLabel}</span>,
           accessor: columnName,
           show: columnVisibility !== null ? columnVisibility : true,
           width:
@@ -735,7 +735,8 @@ export default class DataTable extends Component {
               ? this.renderEditableCell
               : (row) =>
                 row.value !== undefined && row.value !== null
-                  ? String(row.value)
+                  //? String(row.value)
+                  ? <span title={row.value}>{row.value}</span>
                   : row.value,
         };
       });

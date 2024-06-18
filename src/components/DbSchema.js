@@ -165,7 +165,7 @@ export default class DbSchema extends Component {
 		let dict = {};
 
 		// Separate search terms for the table and column searches
-    /*
+		/*
 		annotations
 		annotations domain
 		domain annotations
@@ -541,6 +541,7 @@ export default class DbSchema extends Component {
 		let dbTables = [];
 		for (let i in data.definitions) {
 			if (lib.getTableConfig(this.props.dbIndex, i, "visible") !== false) {
+				//console.log(i)
 				dbTables.push(i);
 				this.parseTableColumns(data.definitions[i].properties, i);
 			}
@@ -742,8 +743,8 @@ export default class DbSchema extends Component {
 					{this.state.table === tableName ? (
 						<FolderIconOpen style={styleSheet.primaryColoured} />
 					) : (
-							<FolderIcon />
-						)}
+						<FolderIcon />
+					)}
 				</ListItemIcon>
 				<ListItemText primary={displayName} style={truncTextStyle} />
 				<ListItemIcon
@@ -757,13 +758,13 @@ export default class DbSchema extends Component {
 						this.state.table === tableName ? (
 							<div />
 						) : (
-								<ClearIcon style={styleSheet.primaryColoured} />
-							)
+							<ClearIcon style={styleSheet.primaryColoured} />
+						)
 					) : this.state.table === tableName ? (
 						<div />
 					) : (
-								<KeyboardArrowDownIcon />
-							)}
+						<KeyboardArrowDownIcon />
+					)}
 				</ListItemIcon>
 			</ListItem>
 		);
@@ -869,8 +870,8 @@ export default class DbSchema extends Component {
 					{visibility ? (
 						<VisibilityIcon style={styleSheet.primaryColoured} />
 					) : (
-							<VisibilityOffIcon />
-						)}
+						<VisibilityOffIcon />
+					)}
 				</ListItemIcon>
 				<ListItemText secondary={displayName} />
 				{fkResults === false ? null : (
@@ -923,7 +924,7 @@ export default class DbSchema extends Component {
 			}
 		}
 		this.props.changeVisibleColumns(visibleColumns);
-    /*this.setState({
+		/*this.setState({
 			[this.state.table + "visibleColumns"]: visibleColumns
 		}, () => {
 			this.props.changeVisibleColumns(this.state[this.state.table + "visibleColumns"]);
@@ -992,7 +993,7 @@ export default class DbSchema extends Component {
 								style={styleSheet.subheaderBackground}
 							>
 								Tables and Columns
-              </ListSubheader>
+							</ListSubheader>
 						}
 					>
 						{this.state.tables.map(table => {

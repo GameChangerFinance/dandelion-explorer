@@ -52,10 +52,12 @@ export default class RightPane extends Component {
       snackBarVisibility: false,
       snackBarMessage: "Unknown error occured",
       rowLimit: Math.min(this.props.rowLimit, maxRowsInOutput) || 25000,
+      extraQuery: "order=id.asc.nullslast",
       url: "",
     };
 
     this.handleRowLimitChange = this.handleRowLimitChange.bind(this);
+    this.handleExtraQueryChange = this.handleExtraQueryChange.bind(this);
     this.handleGetExactRowCountToggle = this.handleGetExactRowCountToggle.bind(
       this
     );
@@ -221,10 +223,14 @@ export default class RightPane extends Component {
         this.state.dbSchemaDefinitions
       );
       const rules = newRules ? newRules : defaultRules;
-
+      // console.log({
+      //   lang: lib.getQBLang(),
+      //   rules,
+      //   filters,
+      // })
       window
         .$(element)
-        .queryBuilder({ filters, rules, plugins: ["not-group"] });
+        .queryBuilder({ default_condition: null, filters, rules, plugins: ["not-group"] });
     } catch (error) {
       console.error(error);
     }
@@ -265,7 +271,7 @@ export default class RightPane extends Component {
     ) {
       window
         .$(element)
-        .queryBuilder({ filters, rules, plugins: ["not-group"] });
+        .queryBuilder({ default_condition: null, filters, rules, plugins: ["not-group"] });
 
       //commenting this out ensures the item loads everytime
       // the problem is if current table has the column names, then it will set it to null. When the actual table is laoded, it sets to blank rules ... so if you switch from GO to Domain annotation table, the rule won't load if the column is protein_id .. which exists in both tables..
@@ -273,7 +279,7 @@ export default class RightPane extends Component {
     } else {
       window
         .$(element)
-        .queryBuilder({ filters, defaultRules, plugins: ["not-group"] });
+        .queryBuilder({ default_condition: null, filters, defaultRules, plugins: ["not-group"] });
     }
   }
 
@@ -416,8 +422,10 @@ export default class RightPane extends Component {
       if (rules["not"] === true) {
         notPrefix = "not.";
       }
-
-      let firstCondition = rules["condition"];
+      //FIX: to avoid a default condition button enabled when less than 2 rules has been added, 
+      //  a real default condition is required to make the url valid
+      //  so i've added defaultRules.condition as the default one.
+      let firstCondition = rules["condition"] || defaultRules.condition;
       let firstRules = rules["rules"];
 
       let conds = this.recursiveRulesExtraction(
@@ -427,7 +435,8 @@ export default class RightPane extends Component {
       );
       url += conds;
       url += "&limit=" + this.state.rowLimit;
-
+      if (this.state.extraQuery)
+        url += "&" + this.state.extraQuery;
       // Add SELECT columns... i.e. which columsn to retrieve
       //url += "&select=" + this.state.selectColumns;
     } else {
@@ -436,6 +445,8 @@ export default class RightPane extends Component {
                 url += "?select=" + this.state.selectColumns;
             }*/
       url += "?limit=" + this.state.rowLimit;
+      if (this.state.extraQuery)
+        url += "&" + this.state.extraQuery;
       // TODO: display a Snack bar showing an error!!!
       this.setState(
         {
@@ -455,6 +466,7 @@ export default class RightPane extends Component {
 
     // Send updated URL to the HistoryPane
     this.props.addToHistory(url, rules);
+    //console.log({ rules, url });
 
     return url;
   }
@@ -621,6 +633,10 @@ export default class RightPane extends Component {
 		}*/
     );
   }
+  handleExtraQueryChange(event) {
+    let extraQuery = event.target.value;
+    this.setState({ extraQuery });
+  }
   handleCopyUrlToClipboard() {
     //based on https://stackoverflow.com/a/12693636
     const str = this.state.url;
@@ -722,6 +738,24 @@ export default class RightPane extends Component {
                   onChange={this.handleRowLimitChange}
                 />
               </Tooltip>
+              <Tooltip
+                id="tooltip-bottom"
+                title={
+                  "Manually add extra PostGREST expressions to the URL, like for enforcing ordering for your custom results"
+                }
+                placement="bottom"
+              >
+                <TextField
+                  id="extraQuery"
+                  type="text"
+                  label="Extra Query"
+                  value={this.state.extraQuery}
+                  style={styleSheet.extraQueryTextField}
+                  margin="normal"
+                  onChange={this.handleExtraQueryChange}
+                />
+              </Tooltip>
+
             </Grid>
 
             <Grid item sm={10} md={5}>
@@ -854,6 +888,11 @@ let styleSheet = {
     marginTop: 32, // want a bit more space at top to clearly indicate new section...
   },
   rowLimitTextField: {
+    marginLeft: 32,
+    marginRight: 5,
+    width: 300,
+  },
+  extraQueryTextField: {
     marginLeft: 32,
     marginRight: 5,
     width: 300,

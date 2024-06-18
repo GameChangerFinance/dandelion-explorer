@@ -9,10 +9,99 @@
         "ide": "https://inception.m2tec.nl/"
       },
       "url": "https://d.postgrest-api.mainnet.dandelion.link",
-      "publicDbAcessType": "read",
+      "publicDbAccessType": "read",
       "foreignKeySearch": false,
       "primaryKeyFunction": true,
-      "regexSupport": true
+      "regexSupport": true,
+      "tableRules": {
+        "Asset": {
+          "visible": false
+        },
+        "AdaPots": {
+          "visible": false
+        },
+        "ActiveStake": {
+          "visible": false
+        },
+        "Block": {
+          "visible": false
+        },
+        "Cardano": {
+          "visible": false
+        },
+        "CollateralInput": {
+          "visible": false
+        },
+        "CollateralOutput": {
+          "visible": false
+        },
+        "Datum": {
+          "visible": false
+        },
+        "Delegation": {
+          "visible": false
+        },
+        "Epoch": {
+          "visible": false
+        },
+        "ProtocolParams": {
+          "visible": false
+        },
+        "Redeemer": {
+          "visible": false
+        },
+        "RedeemerDatum": {
+          "visible": false
+        },
+        "ReferenceInput": {
+          "visible": false
+        },
+        "Reward": {
+          "visible": false
+        },
+        "Script": {
+          "visible": false
+        },
+        "SlotLeader": {
+          "visible": false
+        },
+        "StakeDeregistration": {
+          "visible": false
+        },
+        "StakePool": {
+          "visible": false
+        },
+        "StakePoolOwner": {
+          "visible": false
+        },
+        "StakeRegistration": {
+          "visible": false
+        },
+        "StakePoolRetirement": {
+          "visible": false
+        },
+        "TokenMint": {
+          "visible": false
+        },
+        "TokenInOutput": {
+          "visible": false
+        },
+        "Transaction": {
+          "visible": false
+        },
+        "TransactionInput": {
+          "visible": false
+        },
+        "TransactionOutput": {
+          "visible": false
+        },
+        "Utxo": {
+          "visible": false
+        },
+        "Withdrawal": {
+          "visible": false
+        }
+      }
     },
     {
       "title": "Cardano Pre-Production Testnet",
@@ -23,7 +112,110 @@
         "ide": "https://inception.m2tec.nl/"
       },
       "url": "https://d.postgrest-api.iohk-preprod.dandelion.link",
-      "publicDbAcessType": "read",
+      "publicDbAccessType": "read",
+      "foreignKeySearch": false,
+      "primaryKeyFunction": true,
+      "regexSupport": true,
+      "tableRules": {
+        "Asset": {
+          "visible": false
+        },
+        "AdaPots": {
+          "visible": false
+        },
+        "ActiveStake": {
+          "visible": false
+        },
+        "Block": {
+          "visible": false
+        },
+        "Cardano": {
+          "visible": false
+        },
+        "CollateralInput": {
+          "visible": false
+        },
+        "CollateralOutput": {
+          "visible": false
+        },
+        "Datum": {
+          "visible": false
+        },
+        "Delegation": {
+          "visible": false
+        },
+        "Epoch": {
+          "visible": false
+        },
+        "ProtocolParams": {
+          "visible": false
+        },
+        "Redeemer": {
+          "visible": false
+        },
+        "RedeemerDatum": {
+          "visible": false
+        },
+        "ReferenceInput": {
+          "visible": false
+        },
+        "Reward": {
+          "visible": false
+        },
+        "Script": {
+          "visible": false
+        },
+        "SlotLeader": {
+          "visible": false
+        },
+        "StakeDeregistration": {
+          "visible": false
+        },
+        "StakePool": {
+          "visible": false
+        },
+        "StakePoolOwner": {
+          "visible": false
+        },
+        "StakeRegistration": {
+          "visible": false
+        },
+        "StakePoolRetirement": {
+          "visible": false
+        },
+        "TokenMint": {
+          "visible": false
+        },
+        "TokenInOutput": {
+          "visible": false
+        },
+        "Transaction": {
+          "visible": false
+        },
+        "TransactionInput": {
+          "visible": false
+        },
+        "TransactionOutput": {
+          "visible": false
+        },
+        "Utxo": {
+          "visible": false
+        },
+        "Withdrawal": {
+          "visible": false
+        }
+      }
+    },
+    {
+      "title": "Cardano Pre-Production Testnet (GC node)",
+      "tool": {
+        "label": "PostgREST Help",
+        "url": "https://postgrest.org/en/v12/references/api/tables_views.html",
+        "nativeIde": "https://beta-preprod-wallet.gamechanger.finance/playground",
+        "ide": "https://inception.m2tec.nl/"
+      },
+      "url": "https://node01.gamechanger.finance/postgrest",
+      "publicDbAccessType": "read",
       "foreignKeySearch": false,
       "primaryKeyFunction": true,
       "regexSupport": true

@@ -1,7 +1,7 @@
 export interface IConfigDatabase {
   title: string;
   url: string;
-  publicDbAcessType: string;
+  publicDbAccessType: string;
   foreignKeySearch: boolean;
   primaryKeyFunction: boolean;
   regexSupport: boolean;
