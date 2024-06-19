@@ -119,7 +119,7 @@ It filters out all the pools offline metadata entries that don't have `PEACE` as
 
 Notice that **Query Builder** normalizes URLs by wrapping filters on a `OR`, `AND` or `NOT` condition, in this case an `AND` by default.
 
-[https://d.postgrest-api.mainnet.dandelion.link/pool_offline_data?and=(ticker_name.eq.PEACE)&limit=1](https://d.postgrest-api.mainnet.dandelion.link/pool_offline_data?and=(ticker_name.eq.PEACE)&limit=1)
+▶️ [https://d.postgrest-api.mainnet.dandelion.link/pool_offline_data?and=(ticker_name.eq.PEACE)&limit=1](https://d.postgrest-api.mainnet.dandelion.link/pool_offline_data?and=(ticker_name.eq.PEACE)&limit=1)
 
 <p align="center">
   <img src="docs/images/ex1.jpg">
