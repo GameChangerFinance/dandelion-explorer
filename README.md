@@ -41,7 +41,7 @@ For Dandelion Community Service, it's two databases indexed by [cardano-db-sync]
 - Cardano Mainnet
 - Cardano Pre-Production Testnet
 
->Currently a provisional Pre-Production Testnet database from GameChanger Finance Team (GC) has been added to contribute as alternative during late community nodes downtimes. Please contact [Dandelion Project](https://dandelion.link/) or us if you want to contribute with your own nodes as well to decentralize Cardano even further!
+>Currently provisional databases from GameChanger Finance Team (GC) **Dandelion-Lite** nodes has been added to the online tool to contribute as alternative during late community nodes downtimes. Please contact [Dandelion Project](https://dandelion.link/) or us if you want to contribute with your own nodes as well to decentralize Cardano even further!
 
 <a name="features"></a>
 ## Features
@@ -173,3 +173,8 @@ Cardano wont ever be the same without [Dandelion APIs](https://dandelion.link)!
 This is a tiny contribution back to the Dandelion Community, for developers and students to have a graphical online tool to not only explore and export queries, but also to be able to build them and use them on their own projects. 
 
 Thanks to [PostGUI](https://github.com/priyank-purohit/PostGUI) creator for the excellent work done.
+
+This open-source project has been improved and adapted for Cardano after ₳60.6M positive votes from the Cardano community on Fund 11 of Project Catalyst. Thanks voters and Catalyst for making this possible and help builders to keep working on open source tooling for the great Cardano ecosystem.
+
+
+>Despite ~₳65M positive votes from the community on Fund 11 of Project Catalyst, the [Dandelion Lite](https://cardano.ideascale.com/c/idea/120108) proposal did not reach enough votes to get funded. On it's primary form **Dandelion-Lite** is making possible the provisional nodes offered on the online version of this tool, it has the potential of helping with an easier setup for deploying more Dandelion Community Nodes around the globe to decentralize wallets like GameChanger, Roundtable, and other services, as well as being highly useful for Cardano developers and students, specially for Gimbalabs and their Andamio platform. **PLEASE consider voting for it on future iterations to help us maintain it and improve it for you all**
